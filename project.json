@@ -1,0 +1,26 @@
+{
+  "overview": "An AI-powered interview practice platform for BCA AI/ML students. Practice tech interviews with real-time NLP feedback, session tracking, performance analytics, and downloadable PDF reports — all focused on placement preparation.",
+  "features": [
+    "Internet Identity login with persistent user profiles",
+    "Dashboard with session stats, score trends, and category performance charts",
+    "Interview sessions with 30-second timer per question and auto-advance",
+    "5 question categories: Python Basics, Machine Learning, Data Structures, AI Concepts, Database",
+    "AI/NLP answer analysis: keyword matching, grammar check, confidence score, sentiment analysis",
+    "Better answer suggestions after each submission",
+    "Result analysis page with question-by-question breakdown",
+    "PDF report download with full session summary",
+    "30+ placement-focused interview questions with difficulty levels"
+  ],
+  "category": "education",
+  "tags": [
+    "interview",
+    "ai",
+    "nlp",
+    "education",
+    "placement",
+    "bca",
+    "machine-learning",
+    "practice"
+  ],
+  "last_updated": "2026-04-10T14:19:28.051Z"
+}

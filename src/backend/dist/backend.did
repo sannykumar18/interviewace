@@ -1,0 +1,95 @@
+type UserProfilePublic = 
+ record {
+   id: UserId;
+   name: text;
+   scoreHistory: vec SessionSummary;
+   totalSessions: nat;
+ };
+type UserId = principal;
+type Timestamp = int;
+type SubmitAnswerResult = 
+ record {
+   answerRecord: AnswerRecord;
+   nlpResult: NlpAnalysisResult;
+ };
+type SessionSummary = 
+ record {
+   category: Category;
+   difficulty: Difficulty;
+   sessionId: SessionId;
+   timestamp: Timestamp;
+   totalScore: nat;
+ };
+type SessionId = nat;
+type QuestionId = nat;
+type Question = 
+ record {
+   category: Category;
+   difficulty: Difficulty;
+   expectedKeywords: vec text;
+   id: QuestionId;
+   maxAnswerLength: nat;
+   minAnswerLength: nat;
+   sampleBetterAnswer: text;
+   "text": text;
+ };
+type NlpAnalysisResult = 
+ record {
+   betterAnswer: text;
+   confidenceScore: nat;
+   feedback: text;
+   grammarScore: nat;
+   keywordScore: nat;
+   overallScore: nat;
+   sentiment: text;
+ };
+type InterviewSessionPublic = 
+ record {
+   category: Category;
+   difficulty: Difficulty;
+   endTime: opt Timestamp;
+   id: SessionId;
+   isComplete: bool;
+   questionsAttempted: nat;
+   startTime: Timestamp;
+   totalScore: nat;
+   userId: UserId;
+ };
+type Difficulty = 
+ variant {
+   Advanced;
+   Beginner;
+   Intermediate;
+ };
+type Category = 
+ variant {
+   AIConcepts;
+   DataStructures;
+   Database;
+   MachineLearning;
+   PythonBasics;
+ };
+type AnswerRecord = 
+ record {
+   answerText: text;
+   confidenceScore: nat;
+   feedback: text;
+   grammarScore: nat;
+   keywordScore: nat;
+   questionId: QuestionId;
+   sentimentScore: nat;
+   sessionId: SessionId;
+   totalScore: nat;
+ };
+service : {
+  getQuestions: (category: Category, difficulty: Difficulty) ->
+   (vec Question) query;
+  getSessionResults: (sessionId: SessionId) -> (opt vec AnswerRecord);
+  getUserProfile: () -> (opt UserProfilePublic);
+  getUserSessions: () -> (vec InterviewSessionPublic);
+  startSession: (category: Category, difficulty: Difficulty) ->
+   (InterviewSessionPublic);
+  submitAnswer: (sessionId: SessionId, questionId: QuestionId, answerText:
+   text) -> (SubmitAnswerResult);
+  updateUserProfile: (name: text) -> (UserProfilePublic);
+}
